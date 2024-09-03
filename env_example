@@ -1,5 +1,5 @@
 # App Config
-NODE_ENV=development
+NODE_ENV=production # production, development
 APP_PORT=3000
 APP_NAME="Dot Indonesia BE Test"
 API_PREFIX=api
@@ -8,12 +8,12 @@ DOMAIN=localhost
 # PostgreSQL Config
 DATABASE_TYPE=postgres
 DATABASE_HOST=localhost
-# DATABASE_HOST=dot-indonesia-test-db
+# DATABASE_HOST=dot-indonesia-test-db # if using docker, comment DATABASE_HOST ABOVE
 DATABASE_PORT=5432
 DATABASE_NAME=dot-indonesia
 DATABASE_USERNAME=admin
 DATABASE_PASSWORD=admin
-DATABASE_SYNCHRONIZE=true#disable in prod
+DATABASE_SYNCHRONIZE=false #disable in production
 DATABASE_MAX_CONNECTIONS=100
 DATABASE_SSL_ENABLED=false
 DATABASE_REJECT_UNAUTHORIZED=false

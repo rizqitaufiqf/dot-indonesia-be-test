@@ -18,7 +18,7 @@ export class TodoRepository extends Repository<Todo> {
   }
 
   async createTodo(todo: CreateTodoDto): Promise<Todo> {
-    return this.save(todo);
+    return this.create(todo);
   }
 
   async updateTodo(id: number, todo: Partial<Todo>): Promise<Todo> {

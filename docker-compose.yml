@@ -14,19 +14,19 @@ services:
     env_file:
       - ./.env
 
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: dot-indonesia-test-app
-  #   ports:
-  #     - '4000:4000'
-  #   depends_on:
-  #     - db
-  #   volumes:
-  #     - ./src:/app/src
-  #   env_file:
-  #     - ./.env
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dot-indonesia-test-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - ./.env
 
   pgadmin:
     user: root
@@ -46,4 +46,3 @@ services:
 
 volumes:
   dot-indonesia-postgres-data:
-  redis-insight:
