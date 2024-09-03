@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 
 @Injectable()
 export class PostsService {
+  private readonly url = 'https://jsonplaceholder.typicode.com/posts';
   constructor(
     @InjectRepository(PostRepository)
     private postRepository: PostRepository,
@@ -19,9 +20,7 @@ export class PostsService {
       if (cachedPosts) console.log('cached');
       if (cachedPosts) return cachedPosts;
 
-      const response: AxiosResponse<Post[]> = await axios.get(
-        'https://jsonplaceholder.typicode.com/posts',
-      );
+      const response: AxiosResponse<Post[]> = await axios.get(`${this.url}`);
 
       const postsFromApi = response.data;
       await this.postRepository.clear();
@@ -51,7 +50,7 @@ export class PostsService {
       if (cachedPost) return cachedPost;
 
       const response: AxiosResponse<Post> = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `${this.url}/${id}`,
       );
       const postFromApi = response.data;
       await this.cacheManager.set(`post-${id}`, postFromApi);
@@ -76,7 +75,7 @@ export class PostsService {
   async create(post: Post): Promise<Post> {
     try {
       const response: AxiosResponse<Post> = await axios.post(
-        `https://jsonplaceholder.typicode.com/posts/`,
+        `${this.url}/`,
         post,
       );
       const newPost = response.data;
@@ -100,7 +99,7 @@ export class PostsService {
   async updatePut(id: number, post: Post): Promise<Post> {
     try {
       const response: AxiosResponse<Post> = await axios.put(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `${this.url}/${id}`,
         post,
       );
 
@@ -118,7 +117,7 @@ export class PostsService {
   async updatePatch(id: number, post: Partial<Post>): Promise<Post> {
     try {
       const response: AxiosResponse<Post> = await axios.patch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `${this.url}/${id}`,
         post,
       );
 
@@ -135,9 +134,7 @@ export class PostsService {
   async remove(id: number): Promise<Post> {
     try {
       // await this.postRepository.deletePost(id);
-      const response = await axios.delete(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
-      );
+      const response = await axios.delete(`${this.url}/${id}`);
       await this.cacheManager.del(`post-${id}`);
       await this.cacheManager.del('posts');
 
