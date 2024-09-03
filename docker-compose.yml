@@ -1,0 +1,49 @@
+# Execute (bcs error load custom env file)-> docker compose --env-file .env up -d
+services:
+  db:
+    image: postgres:latest
+    container_name: dot-indonesia-test-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - dot-indonesia-postgres-data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: dot-indonesia-test-app
+  #   ports:
+  #     - '4000:4000'
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - ./src:/app/src
+  #   env_file:
+  #     - ./.env
+
+  pgadmin:
+    user: root
+    image: dpage/pgadmin4
+    container_name: dot-indonesia-test-pgadmin
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - dot-indonesia-postgres-data:/var/lib/pgadmin
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+volumes:
+  dot-indonesia-postgres-data:
+  redis-insight:
