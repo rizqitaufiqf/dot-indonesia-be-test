@@ -22,6 +22,11 @@ export type DatabaseConfigType = {
   cert?: string;
 };
 
+export type CacheConfigType = {
+  ttl: number;
+  max: number;
+};
+
 export type AllConfigType = {
   app: AppConfigType;
   database: DatabaseConfigType;
