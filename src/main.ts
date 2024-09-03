@@ -24,8 +24,8 @@ async function bootstrap() {
   );
 
   const options = new DocumentBuilder()
-    .setTitle('Swagger API')
-    .setDescription('API documentations')
+    .setTitle('To-Do App API')
+    .setDescription('API documentations for To-Do App')
     .setVersion('1.0')
     .build();
 
