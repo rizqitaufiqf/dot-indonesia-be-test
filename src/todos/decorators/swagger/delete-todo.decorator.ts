@@ -2,9 +2,9 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { BaseSwaggerDecorator } from './base.decorator';
 
-export function DeletePostSwagger() {
+export function DeleteTodoSwagger() {
   return applyDecorators(
-    BaseSwaggerDecorator('Delete Post'),
+    BaseSwaggerDecorator('Delete Todo'),
     ApiOkResponse({
       schema: {
         type: 'object',

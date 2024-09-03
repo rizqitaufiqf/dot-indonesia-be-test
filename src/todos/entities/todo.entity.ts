@@ -1,9 +1,10 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('post')
-export class Post extends BaseEntity {
+@Entity('todo')
+export class Todo extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   uuid: number;
+
   @Column()
   id: number;
 
@@ -14,5 +15,5 @@ export class Post extends BaseEntity {
   title: string;
 
   @Column()
-  body: string;
+  completed: boolean;
 }

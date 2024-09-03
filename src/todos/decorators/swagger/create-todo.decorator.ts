@@ -2,21 +2,21 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import { BaseSwaggerDecorator } from './base.decorator';
 
-export function CreatePostSwagger() {
+export function CreateTodoSwagger() {
   return applyDecorators(
-    BaseSwaggerDecorator('Create Post'),
+    BaseSwaggerDecorator('Create Todo'),
     ApiCreatedResponse({
       schema: {
         type: 'object',
         properties: {
           title: { type: 'string' },
-          body: { type: 'string' },
+          completed: { type: 'boolean' },
           userId: { type: 'number' },
           id: { type: 'number' },
         },
         example: {
-          title: 'Go to Market',
-          body: 'Buy some vegetables and milk',
+          title: 'Buy some vegetables and milk',
+          completed: true,
           userId: 1,
           id: 101,
         },

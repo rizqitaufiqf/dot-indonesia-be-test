@@ -4,7 +4,7 @@ import { BaseSwaggerDecorator } from './base.decorator';
 
 export function UpdatePutSwagger() {
   return applyDecorators(
-    BaseSwaggerDecorator('Update Put Post'),
+    BaseSwaggerDecorator('Update Put Todo'),
     ApiOkResponse({
       schema: {
         type: 'array',
@@ -14,14 +14,14 @@ export function UpdatePutSwagger() {
             id: { type: 'number' },
             userId: { type: 'number' },
             title: { type: 'string' },
-            body: { type: 'string' },
+            completed: { type: 'boolean' },
           },
         },
         example: {
           userId: 1,
           id: 1,
-          title: 'Go to Market',
-          body: 'Buy some vegetables and milk',
+          title: 'Buy some vegetables and milk',
+          completed: false,
         },
       },
     }),

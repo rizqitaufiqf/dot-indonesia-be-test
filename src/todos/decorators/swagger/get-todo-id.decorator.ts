@@ -2,9 +2,9 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { BaseSwaggerDecorator } from './base.decorator';
 
-export function GetPostsByIdSwagger() {
+export function GetTodosByIdSwagger() {
   return applyDecorators(
-    BaseSwaggerDecorator('Get Post By ID'),
+    BaseSwaggerDecorator('Get Todo By ID'),
     ApiOkResponse({
       schema: {
         type: 'object',
@@ -12,15 +12,14 @@ export function GetPostsByIdSwagger() {
           id: { type: 'number' },
           userId: { type: 'number' },
           title: { type: 'string' },
-          body: { type: 'string' },
+          completed: { type: 'boolean' },
         },
       },
       example: {
         userId: 1,
         id: 1,
-        title:
-          'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-        body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+        title: 'quis ut nam facilis et officia qui',
+        completed: false,
       },
     }),
     ApiNotFoundResponse({

@@ -2,16 +2,19 @@ import { IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePutDto {
-  @ApiProperty({ example: 'Go to Market', description: 'Post title' })
+  @ApiProperty({
+    example: 'Buy some vegetables and milk',
+    description: 'Todo title',
+  })
   @IsNotEmpty()
   title: string;
 
   @ApiProperty({
-    example: 'Buy some vegetables and milk',
-    description: 'Post body',
+    example: true,
+    description: 'Todo status',
   })
   @IsNotEmpty()
-  body: string;
+  completed: boolean;
 
   @ApiProperty({
     example: 2,
@@ -23,7 +26,7 @@ export class UpdatePutDto {
 
   @ApiProperty({
     example: 1,
-    description: 'post ID',
+    description: 'todo ID',
   })
   @IsNotEmpty()
   @IsInt()

@@ -2,16 +2,19 @@ import { IsInt, IsOptional } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdatePatchDto {
-  @ApiPropertyOptional({ example: 'Go to Market', description: 'Post title' })
+  @ApiPropertyOptional({
+    example: 'Buy some vegetables and milk',
+    description: 'Todo title',
+  })
   @IsOptional()
   title: string;
 
   @ApiPropertyOptional({
-    example: 'Buy some vegetables and milk',
-    description: 'Post body',
+    example: true,
+    description: 'Todo status',
   })
   @IsOptional()
-  body: string;
+  completed: boolean;
 
   @ApiPropertyOptional({
     example: 2,
@@ -23,7 +26,7 @@ export class UpdatePatchDto {
 
   @ApiPropertyOptional({
     example: 1,
-    description: 'post ID',
+    description: 'todo ID',
   })
   @IsOptional()
   @IsInt()

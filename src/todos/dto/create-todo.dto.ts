@@ -1,17 +1,20 @@
 import { IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreatePostDto {
-  @ApiProperty({ example: 'Go to Market', description: 'Post title' })
+export class CreateTodoDto {
+  @ApiProperty({
+    example: 'Buy some vegetables and milk',
+    description: 'Todo title',
+  })
   @IsNotEmpty()
   title: string;
 
   @ApiProperty({
-    example: 'Buy some vegetables and milk',
-    description: 'Post body',
+    example: true,
+    description: 'Todo status',
   })
   @IsNotEmpty()
-  body: string;
+  completed: boolean;
 
   @ApiProperty({
     example: 2,
