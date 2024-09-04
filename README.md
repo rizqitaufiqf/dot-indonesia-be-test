@@ -3,15 +3,15 @@
 ## 📜Contents
 
 - To-Do app contents
-  - [Demo App](#demo-app)
-  - [🔍Stacks](#stacks)
-  - [🛠️Installation](#️installation)
-    - [🐳Docker](#docker)
-    - [🖥️Local Machine](#️-local-machine)
+  - [🚀 Demo App](#demo-app)
+  - [🔍 Stacks](#stacks)
+  - [🛠️ Installation](#️installation)
+    - [🐳 Docker](#docker)
+    - [🖥️ Local Machine](#️-local-machine)
 
-## [Demo App](https://todo.rizqitaufiq.my.id/docs)
+## [🚀 Demo App](https://todo.rizqitaufiq.my.id/docs)
 
-## 🔍Stacks
+## 🔍 Stacks
 
 Application Stacks:
 
@@ -22,9 +22,9 @@ Application Stacks:
 - Docker Compose
 - Sentry (track errors and monitor performance)
 
-## 🛠️Installation
+## 🛠️ Installation
 
-### 🐳Docker
+### 🐳 Docker
 
 To run this app (using Docker), follow this steps:
 
