@@ -3,8 +3,8 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetAllDto {
   @ApiPropertyOptional({
-    example: 'true',
-    description: 'Todo status',
+    example: '',
+    description: 'Todo status (can be true or false or empty)',
   })
   @IsOptional()
   @IsBooleanString()

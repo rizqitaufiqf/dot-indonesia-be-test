@@ -32,7 +32,6 @@ export class TodosService {
           : completed === false
             ? 'todos-false'
             : 'todos';
-      this.logger.log(cacheName);
 
       const cachedTodos = await this.cacheManager.get<Todo[]>(cacheName);
       if (cachedTodos) return cachedTodos;
