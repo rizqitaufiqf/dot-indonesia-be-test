@@ -8,7 +8,7 @@ DOMAIN=localhost
 # PostgreSQL Config
 DATABASE_TYPE=postgres
 DATABASE_HOST=localhost
-# DATABASE_HOST=dot-indonesia-test-db # if using docker, comment DATABASE_HOST ABOVE
+# DATABASE_HOST=dot-indonesia-test-db # if using docker, comment DATABASE_HOST above
 DATABASE_PORT=5432
 DATABASE_NAME=dot-indonesia
 DATABASE_USERNAME=admin
@@ -27,5 +27,5 @@ PGADMIN_DEFAULT_EMAIL=admin@mail.com
 PGADMIN_DEFAULT_PASSWORD=admin
 
 # Cache Config
-CACHE_TTL=1000
+CACHE_TTL=60000 # 1 minute
 CACHE_MAX=200

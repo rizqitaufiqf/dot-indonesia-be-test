@@ -17,16 +17,18 @@ export class TodoRepository extends Repository<Todo> {
   }
 
   async createTodo(todo: Todo): Promise<Todo> {
+    const data = await this.getByTodoId(todo.id);
+    if (data) this.deleteTodo(data.id);
+
     const newTodo = this.create(todo);
     return this.save(newTodo);
   }
 
   async updateTodo(id: number, todo: Partial<Todo>): Promise<Todo> {
-    await this.update(id, todo);
-    return this.getByTodoId(id);
+    return (await this.update({ id }, todo)).raw[0];
   }
 
   async deleteTodo(id: number): Promise<void> {
-    await this.delete(id);
+    await this.delete({ id });
   }
 }

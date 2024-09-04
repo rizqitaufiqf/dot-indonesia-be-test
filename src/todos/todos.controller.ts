@@ -33,12 +33,15 @@ export class TodosController {
   @GetTodosSwagger()
   @Get()
   getAll(@Query() params?: GetAllDto) {
-    if (params.completed === 'true') {
+    if (params.completed === undefined) {
+      return this.todoService.getAll();
+    } else if (params.completed === 'true') {
       return this.todoService.getAll(true);
     } else if (params.completed === 'false') {
       return this.todoService.getAll(false);
+    } else {
+      return [];
     }
-    return this.todoService.getAll();
   }
 
   @GetTodosByIdSwagger()

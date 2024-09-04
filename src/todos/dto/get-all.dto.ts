@@ -1,4 +1,4 @@
-import { IsBooleanString, IsOptional } from 'class-validator';
+import { IsOptional } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetAllDto {
@@ -7,6 +7,5 @@ export class GetAllDto {
     description: 'Todo status (can be true or false or empty)',
   })
   @IsOptional()
-  @IsBooleanString()
   completed?: string;
 }

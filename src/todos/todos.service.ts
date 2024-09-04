@@ -34,7 +34,10 @@ export class TodosService {
             : 'todos';
 
       const cachedTodos = await this.cacheManager.get<Todo[]>(cacheName);
-      if (cachedTodos) return cachedTodos;
+      if (cachedTodos) {
+        this.logger.log('Data retrive from cache', TodosService.name);
+        return cachedTodos;
+      }
 
       const response: AxiosResponse<Todo[]> = await axios.get(`${this.url}`);
       const filteredTodos =
@@ -43,6 +46,7 @@ export class TodosService {
           : response.data;
 
       this.cacheManager.set(cacheName, filteredTodos);
+
       await this.todoRepository.clear();
       const newTodo = this.todoRepository.create(filteredTodos);
       await this.todoRepository.save(newTodo);
@@ -62,15 +66,17 @@ export class TodosService {
 
   async getTodoById(id: number): Promise<Todo> {
     try {
-      let cachedTodo = await this.cacheManager.get<Todo>(`todo-${id}`);
-      if (cachedTodo) return cachedTodo;
+      const cachedTodo = await this.cacheManager.get<Todo>(`todo-${id}`);
+      if (cachedTodo) {
+        this.logger.log('Data retrive from cache', TodosService.name);
+        return cachedTodo;
+      }
 
       const response: AxiosResponse<Todo> = await axios.get(
         `${this.url}/${id}`,
       );
 
       await this.cacheManager.set(`todo-${id}`, response.data);
-      cachedTodo = await this.cacheManager.get<Todo>(`todo-${id}`);
 
       return response.data;
     } catch (error) {
@@ -118,6 +124,16 @@ export class TodosService {
         todo,
       );
 
+      const data = await this.getTodoById(id);
+      if (data) {
+        this.logger.log('exist');
+        this.cacheManager.del(`todo-${id}`);
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { id: _, ...rest } = response.data;
+        this.todoRepository.updateTodo(id, rest);
+      }
+
       return response.data;
     } catch (error) {
       this.logger.error(
@@ -138,6 +154,16 @@ export class TodosService {
         todo,
       );
 
+      const data = await this.getTodoById(id);
+      if (data) {
+        this.logger.log('exist');
+        this.cacheManager.del(`todo-${id}`);
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { id: _, ...rest } = response.data;
+        this.todoRepository.updateTodo(id, rest);
+      }
+
       return response.data;
     } catch (error) {
       this.logger.error(
@@ -153,15 +179,20 @@ export class TodosService {
 
   async remove(id: number): Promise<Todo> {
     try {
+      this.logger.log('1');
       const response = await axios.delete(`${this.url}/${id}`);
       await this.cacheManager.reset();
 
+      this.logger.log('2');
+      const data = await this.getTodoById(id);
+      if (data) {
+        this.logger.log('exist');
+        await this.todoRepository.deleteTodo(id);
+      }
+
       return response.data;
     } catch (error) {
-      this.logger.error(
-        error?.response?.data || error?.message || error,
-        TodosService.name,
-      );
+      this.logger.error(error, TodosService.name);
       throw new HttpException(
         error?.response?.data || error?.message || 'Internal Server Error',
         error?.response?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
