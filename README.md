@@ -1,8 +1,8 @@
-# library-management
+# To-Do App
 
 ## 📜Contents
 
-- Library Management app contents
+- To-Do app contents
   - [🔍Stacks](#stacks)
   - [🛠️Installation](#️installation)
     - [🐳Docker](#docker)
@@ -28,7 +28,7 @@ To run this app (using Docker), follow this steps:
 2. Clone this repo and navigate to the project directory:
 
 ```bash
-git clone https://github.com/rizqitaufiqf/dot-indonesia-be-test.git && cd dot-indonesia-be-test
+git clone https://github.com/rizqitakufiqf/dot-indonesia-be-test.git && cd dot-indonesia-be-test
 ```
 
 3. Create .env file called `.env` from `env_example`
