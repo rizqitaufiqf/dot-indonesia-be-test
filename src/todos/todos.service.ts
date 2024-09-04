@@ -39,12 +39,13 @@ export class TodosService {
       const response: AxiosResponse<Todo[]> = await axios.get(`${this.url}`);
       const filteredTodos =
         completed !== undefined
-          ? response.data.filter((todo) => todo.completed === completed)
+          ? response.data.filter((todo: Todo) => todo.completed === completed)
           : response.data;
 
       this.cacheManager.set(cacheName, filteredTodos);
       await this.todoRepository.clear();
-      await this.todoRepository.create(filteredTodos);
+      const newTodo = this.todoRepository.create(filteredTodos);
+      await this.todoRepository.save(newTodo);
 
       return filteredTodos;
     } catch (error) {
