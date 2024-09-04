@@ -11,6 +11,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
 import cacheConfig from './cache.config';
 import { CacheConfigType } from './config.type';
+import { SentryModule } from '@sentry/nestjs/setup';
 
 @Module({
   imports: [
@@ -39,8 +40,9 @@ import { CacheConfigType } from './config.type';
         };
       },
     }),
+    SentryModule.forRoot(),
   ],
   providers: [],
-  exports: [NestConfigModule, TypeOrmModule, CacheModule],
+  exports: [NestConfigModule, TypeOrmModule, CacheModule, SentryModule],
 })
 export class ConfigModule {}

@@ -4,6 +4,7 @@ APP_PORT=3000
 APP_NAME="Dot Indonesia BE Test"
 API_PREFIX=api
 DOMAIN=localhost
+SENTRY_DSN=  # If this is null, Sentry will be initialized, but it won't be able to catch any errors.
 
 # PostgreSQL Config
 DATABASE_TYPE=postgres

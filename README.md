@@ -17,6 +17,7 @@ Application Stacks:
 - TypeORM
 - Docker
 - Docker Compose
+- Sentry (track errors and monitor performance)
 
 ## 🛠️Installation
 

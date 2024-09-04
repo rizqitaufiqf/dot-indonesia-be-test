@@ -3,6 +3,7 @@ export type AppConfigType = {
   port: number;
   name: string;
   apiPrefix: string;
+  sentryDsn: string;
 };
 
 export type DatabaseConfigType = {

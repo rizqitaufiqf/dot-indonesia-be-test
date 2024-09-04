@@ -22,6 +22,10 @@ class EnvironmentVariablesValidator {
   @IsString()
   @IsOptional()
   API_PREFIX: string;
+
+  @IsString()
+  @IsOptional()
+  SENTRY_DSN: string;
 }
 
 export default registerAs<AppConfigType>('app', (): AppConfigType => {
@@ -33,5 +37,6 @@ export default registerAs<AppConfigType>('app', (): AppConfigType => {
     name: env.APP_NAME || 'app',
     port: env.APP_PORT ? parseInt(env.APP_PORT, 10) : 3000,
     apiPrefix: env.API_PREFIX || 'api',
+    sentryDsn: env.SENTRY_DSN || '',
   };
 });
