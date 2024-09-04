@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -19,6 +20,7 @@ import { UpdatePatchDto } from './dto/update-patch-todo.dto';
 import { UpdatePutSwagger } from './decorators/swagger/update-put-todo.decorator';
 import { UpdatePatchSwagger } from './decorators/swagger/update-patch-todo.decorator';
 import { DeleteTodoSwagger } from './decorators/swagger/delete-todo.decorator';
+import { GetAllDto } from './dto/get-all.dto';
 
 @ApiTags('Todos')
 @Controller({
@@ -30,7 +32,12 @@ export class TodosController {
 
   @GetTodosSwagger()
   @Get()
-  getAll() {
+  getAll(@Query() params?: GetAllDto) {
+    if (params.completed === 'true') {
+      return this.todoService.getAll(true);
+    } else if (params.completed === 'false') {
+      return this.todoService.getAll(false);
+    }
     return this.todoService.getAll();
   }
 

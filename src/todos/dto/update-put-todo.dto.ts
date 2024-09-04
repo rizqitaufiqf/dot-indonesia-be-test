@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePutDto {
@@ -14,6 +14,7 @@ export class UpdatePutDto {
     description: 'Todo status',
   })
   @IsNotEmpty()
+  @IsBoolean()
   completed: boolean;
 
   @ApiProperty({

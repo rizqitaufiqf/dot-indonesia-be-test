@@ -24,19 +24,30 @@ export class TodosService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
-  async getAll(): Promise<Todo[]> {
+  async getAll(completed?: boolean): Promise<Todo[]> {
     try {
-      const cachedTodos = await this.cacheManager.get<Todo[]>('todos');
+      const cacheName =
+        completed === true
+          ? 'todos-true'
+          : completed === false
+            ? 'todos-false'
+            : 'todos';
+      this.logger.log(cacheName);
+
+      const cachedTodos = await this.cacheManager.get<Todo[]>(cacheName);
       if (cachedTodos) return cachedTodos;
 
       const response: AxiosResponse<Todo[]> = await axios.get(`${this.url}`);
+      const filteredTodos =
+        completed !== undefined
+          ? response.data.filter((todo) => todo.completed === completed)
+          : response.data;
 
-      this.cacheManager.set('todos', response.data);
-
+      this.cacheManager.set(cacheName, filteredTodos);
       await this.todoRepository.clear();
-      await this.todoRepository.create(response.data);
+      await this.todoRepository.create(filteredTodos);
 
-      return response.data;
+      return filteredTodos;
     } catch (error) {
       this.logger.error(
         error?.response?.data || error?.message || error,
@@ -60,7 +71,6 @@ export class TodosService {
 
       await this.cacheManager.set(`todo-${id}`, response.data);
       cachedTodo = await this.cacheManager.get<Todo>(`todo-${id}`);
-      console.log(cachedTodo);
 
       return response.data;
     } catch (error) {
